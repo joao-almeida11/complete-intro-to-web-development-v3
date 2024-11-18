@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    justify-content: center;
+    vertical-align: middle;
+    background-color: #482414;
+    color: #efe5b6;
+}
+
+.checkout-page {
+    display: grid;
+
+}
+
+.checkout-card--items {
+
+}
+
+.checkout-card--order-name {
+
+}
+
+.checkout-card--payment-credentials {
+
+}
+
+.items-component-wrapper {
+ background-color: #ede1d5;
+}
+
+.items-component-wrapper--label {
+    color: #ad8b6a;
+}
+
+.item-component {
+
+}
+
+.item-component--amount {
+
+}
+
+.item-component--name {
+    font-weight: bold;
+}
+
+.item-component--description-wrapper {
+
+}
+
+.item-component--cost {
+
+}
+
+.input-group--control {
+
+}
+
+.input-group--label {
+
+}
+
+.input-group--input {
+
+}
