@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+img {
+    width: 500px;
+    display: inline-block;
+}
+
+.img-wrap-container {
+    display: flex;
+    flex-wrap: wrap;
+}
