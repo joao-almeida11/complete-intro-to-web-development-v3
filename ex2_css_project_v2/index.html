@@ -86,48 +86,51 @@
         <link rel="stylesheet" href="index.css" />
     </head>
     <body>
-        <header>
+        <nav>
             <img src="coffee_masters_logo.png" alt="Coffee Masters logo" />
-            <span> Coffee Masters </span>
-        </header>
+            <h1>Coffee Masters</h1>
+        </nav>
 
         <main class="checkout">
-            <section class="checkout--items-list">
+            <div class="checkout--items-list box">
                 <h2>ITEMS</h2>
-                <article>
-                    <div>1x</div>
-                    <div>
-                        <h3>Cappuccino</h3>
-                        <div class="description-list">
-                            <span>Lite foam</span>
+                <ul>
+                    <li>
+                        <div>1x</div>
+                        <div>
+                            <div class="item--title">Cappuccino</div>
+                            <ul class="description-list">
+                                <li>Lite foam</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div>$3.35</div>
-                </article>
-                <article>
-                    <div>1x</div>
-                    <div>
-                        <h3>Cappuccino</h3>
-                        <div class="description-list">
-                            <span>Lite milk</span>
-                            <span>Double expresso</span>
+                        <div>$3.35</div>
+                    </li>
+                    <li>
+                        <div>1x</div>
+                        <div>
+                            <div class="item--title">Cappuccino</div>
+                            <ul class="description-list">
+                                <li>Lite milk</li>
+                                <li>Double expresso</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div>$3.85</div>
-                </article>
-                <article>
-                    <div>1x</div>
-                    <div>
-                        <h3>Croissant</h3>
-                        <div class="description-list">
-                            <span>Butter</span>
+                        <div>$3.85</div>
+                    </li>
+                    <li>
+                        <div>1x</div>
+                        <div>
+                            <div class="item--title">Croissant</div>
+                            <ul class="description-list">
+                                <li>Butter</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div>$2.45</div>
-                </article>
-            </section>
+                        <div>$2.45</div>
+                    </li>
+                </ul>
+            </div>
+
             <div class="checkout--inputs-grid-area">
-                <section class="checkout--name-input">
+                <section class="checkout--name-input box">
                     <h2>NAME</h2>
                     <div class="input-with-border-label">
                         <label for="checkout-name-id">Name for order</label>
@@ -138,7 +141,7 @@
                         />
                     </div>
                 </section>
-                <section class="checkout--payment-inputs">
+                <section class="box">
                     <h2>PAYMENT</h2>
                     <div class="input-with-border-label">
                         <label for="checkout-card-number-id">Card number</label>
@@ -157,12 +160,23 @@
         </main>
 
         <section class="checkout--totals">
-            <article>
-                <div>Subtotal: <span>$9.65</span></div>
-                <div>Tax: <span>$0.82</span></div>
-                <div>Total: <span>$10.47</span></div>
-            </article>
-            <button>Place order</button>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Subtotal:</td>
+                        <td>$9.65</td>
+                    </tr>
+                    <tr>
+                        <td>Tax:</td>
+                        <td>$0.82</td>
+                    </tr>
+                    <tr>
+                        <td>Total:</td>
+                        <td>$10.47</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn-checkout" type="button">Place order</button>
         </section>
     </body>
 </html>
