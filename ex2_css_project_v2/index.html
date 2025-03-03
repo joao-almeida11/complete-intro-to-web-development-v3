@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Coffee Masters</title>
+        <link
+            rel="apple-touch-icon"
+            sizes="57x57"
+            href="favicon/apple-icon-57x57.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="60x60"
+            href="favicon/apple-icon-60x60.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="72x72"
+            href="favicon/apple-icon-72x72.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="76x76"
+            href="favicon/apple-icon-76x76.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="114x114"
+            href="favicon/apple-icon-114x114.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="120x120"
+            href="favicon/apple-icon-120x120.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="144x144"
+            href="favicon/apple-icon-144x144.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="152x152"
+            href="favicon/apple-icon-152x152.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="favicon/apple-icon-180x180.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="favicon/android-icon-192x192.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="96x96"
+            href="favicon/favicon-96x96.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/manifest.json" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <header>
+            <img src="coffee_masters_logo.png" alt="Coffee Masters logo" />
+            <span> Coffee Masters </span>
+        </header>
+
+        <main class="checkout">
+            <section class="checkout--items-list">
+                <h2>ITEMS</h2>
+                <article>
+                    <div>1x</div>
+                    <div>
+                        <h3>Cappuccino</h3>
+                        <div class="description-list">
+                            <span>Lite foam</span>
+                        </div>
+                    </div>
+                    <div>$3.35</div>
+                </article>
+                <article>
+                    <div>1x</div>
+                    <div>
+                        <h3>Cappuccino</h3>
+                        <div class="description-list">
+                            <span>Lite milk</span>
+                            <span>Double expresso</span>
+                        </div>
+                    </div>
+                    <div>$3.85</div>
+                </article>
+                <article>
+                    <div>1x</div>
+                    <div>
+                        <h3>Croissant</h3>
+                        <div class="description-list">
+                            <span>Butter</span>
+                        </div>
+                    </div>
+                    <div>$2.45</div>
+                </article>
+            </section>
+            <div class="checkout--inputs-grid-area">
+                <section class="checkout--name-input">
+                    <h2>NAME</h2>
+                    <div class="input-with-border-label">
+                        <label for="checkout-name-id">Name for order</label>
+                        <input
+                            id="checkout-name-id"
+                            type="text"
+                            value="Ford Prefect"
+                        />
+                    </div>
+                </section>
+                <section class="checkout--payment-inputs">
+                    <h2>PAYMENT</h2>
+                    <div class="input-with-border-label">
+                        <label for="checkout-card-number-id">Card number</label>
+                        <input
+                            id="checkout-card-number-id"
+                            type="text"
+                            value="1234 5678 9012 3456"
+                        />
+                    </div>
+                    <div class="input-with-border-label">
+                        <label for="checkout-CCV-id">CCV number</label>
+                        <input id="checkout-CCV-id" type="number" value="001" />
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <section class="checkout--totals">
+            <article>
+                <div>Subtotal: <span>$9.65</span></div>
+                <div>Tax: <span>$0.82</span></div>
+                <div>Total: <span>$10.47</span></div>
+            </article>
+            <button>Place order</button>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #482414;
+    color: #efe5b6;
+    padding: 1rem;
+}
+
+.header-logo > img {
+    height: 50px;
+    width: auto;
+    padding-right: 10px;
+}
+
+.checkout-card--container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    margin-top: 3rem;
+    margin-left: 1rem;
+}
+
+.checkout-card--items {
+}
+
+.checkout-card--order-name {
+}
+
+.checkout-card--payment-credentials {
+}
+
+.items-component-wrapper {
+    background-color: #ede1d5;
+    padding: 0.25rem;
+    border-radius: 3%;
+}
+
+.items-component-wrapper--label {
+    color: #ad8b6a;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+}
+
+.item-component {
+    display: grid;
+    grid-template-columns: 40px auto 80px;
+    padding: 1rem;
+    border-bottom: 1px solid #ac8869;
+    margin-bottom: 1rem;
+}
+
+.item-component:last-of-type {
+    border: none;
+    margin-bottom: 0;
+}
+
+.item-component--name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.item-component--description-wrapper {
+}
+
+.item-component--cost {
+}
+
+.input-group--control {
+}
+
+.input-group--label {
+}
+
+.input-group--input {
+}
