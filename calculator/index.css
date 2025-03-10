@@ -14,6 +14,14 @@ body {
 section {
     border: 2px solid grey;
     min-width: 500px;
+    position: relative;
+}
+.indicator {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: white;
+    font-size: 2rem;
 }
 .monitor {
     color: white;
