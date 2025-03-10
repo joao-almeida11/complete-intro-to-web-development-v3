@@ -1,9 +1,6 @@
 * {
     box-sizing: border-box;
 }
-:root {
-    --border-gap: 10px;
-}
 body {
     margin: 0;
     min-height: 100vh;
@@ -15,6 +12,7 @@ body {
 }
 section {
     border: 2px solid grey;
+    min-width: 500px;
 }
 .monitor {
     color: white;
@@ -24,37 +22,84 @@ section {
     font-size: 2rem;
 }
 ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        'clear clear backspace divide'
+        'n7 n8 n9 multiply'
+        'n4 n5 n6 minus'
+        'n1 n2 n3 plus'
+        'n0 n0 n0 sum';
+
     background-color: black;
-    gap: var(--border-gap);
     margin: 0;
     padding: 0;
-    width: 100%;
+
+    gap: 10px;
+}
+.clear {
+    grid-area: clear;
+}
+.backspace {
+    grid-area: backspace;
+}
+.divide {
+    grid-area: divide;
+}
+.n7 {
+    grid-area: n7;
+}
+.n8 {
+    grid-area: n8;
+}
+.n9 {
+    grid-area: n9;
+}
+.multiply {
+    grid-area: multiply;
+}
+.n4 {
+    grid-area: n4;
+}
+.n5 {
+    grid-area: n5;
+}
+.n6 {
+    grid-area: n6;
+}
+.minus {
+    grid-area: minus;
+}
+.n1 {
+    grid-area: n1;
+}
+.n2 {
+    grid-area: n2;
+}
+.n3 {
+    grid-area: n3;
+}
+.plus {
+    grid-area: plus;
+}
+.n0 {
+    grid-area: n0;
+}
+.sum {
+    grid-area: sum;
 }
 ul > li {
-    flex-basis: calc(25% - var(--border-gap));
     color: black;
     background-color: #d8d9db;
-    /* width: 100px; */
     height: 100px;
     justify-content: center;
     align-items: center;
     display: flex;
     font-size: 2rem;
-    /* margin: 0 10px; */
 
     &:hover {
         background-color: #ebebeb;
     }
-}
-.size-2x {
-    flex-basis: calc(50% - var(--border-gap));
-}
-.size-3x {
-    flex-basis: calc(75% - var(--border-gap));
 }
 .operator-color {
     color: white;
