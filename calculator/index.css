@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 body {
+    font-family: monospace;
     margin: 0;
     min-height: 100vh;
     min-width: 100vh;
@@ -21,7 +22,7 @@ section {
     text-align: right;
     font-size: 2rem;
 }
-ul {
+.btns-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
@@ -88,7 +89,7 @@ ul {
 .sum {
     grid-area: sum;
 }
-ul > li {
+button {
     color: black;
     background-color: #d8d9db;
     height: 100px;
