@@ -124,6 +124,7 @@ function plus() {
 
 function sum() {
     if (monitor.innerText === '0') return;
+    if (historyNumbers.length < 2) return; // the current number in the monitor is still not in the historyNumbers
 
     historyNumbers.push({
         type: 'number',
