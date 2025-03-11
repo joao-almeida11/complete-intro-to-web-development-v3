@@ -24,6 +24,7 @@ listener.addEventListener('click', function (e) {
             case 'divide':
                 divide();
                 break;
+            case 'n0':
             case 'n1':
             case 'n2':
             case 'n3':
@@ -116,7 +117,10 @@ function minus() {
     isSumDone = false;
     if (monitor.innerText === '0') {
         // replace the indicator (indicates if a number is positive or negative)
-        if (historyNumbers[historyNumbers.length - 1].type === 'indicator') {
+        if (
+            historyNumbers.length !== 0 &&
+            historyNumbers[historyNumbers.length - 1].type === 'indicator'
+        ) {
             historyNumbers.pop();
         }
         // for negative numbers
@@ -144,7 +148,10 @@ function plus() {
 
     if (monitor.innerText === '0') {
         // replace the indicator (indicates if a number is positive or negative)
-        if (historyNumbers[historyNumbers.length - 1].type === 'indicator') {
+        if (
+            historyNumbers.length !== 0 &&
+            historyNumbers[historyNumbers.length - 1].type === 'indicator'
+        ) {
             historyNumbers.pop();
         }
         // for positive numbers
