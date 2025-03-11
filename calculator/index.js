@@ -6,59 +6,6 @@ console.log('monitor', monitor.innerText);
 let historyNumbers = [];
 let isSumDone = false;
 
-const listener = document.querySelector('.btns-grid');
-listener.addEventListener('click', function (e) {
-    // e.stopPropagation();
-    e.preventDefault();
-
-    console.log('formOnClick', e.target);
-    if (e.target.tagName === 'BUTTON') {
-        console.log('e.target.classList', e.target.classList);
-        switch (e.target.classList[0]) {
-            case 'clear':
-                clear();
-                break;
-            case 'backspace':
-                backspace();
-                break;
-            case 'divide':
-                divide();
-                break;
-            case 'n0':
-            case 'n1':
-            case 'n2':
-            case 'n3':
-            case 'n4':
-            case 'n5':
-            case 'n6':
-            case 'n7':
-            case 'n8':
-            case 'n9':
-                if (isSumDone) return;
-
-                addNumberToMonitor(e.target.classList[0]);
-                break;
-            case 'multiply':
-                multiply();
-                break;
-            case 'minus':
-                minus();
-                break;
-            case 'plus':
-                plus();
-                break;
-            case 'sum':
-                sum();
-                break;
-            default:
-                console.error('btn method not defined');
-                break;
-        }
-    }
-
-    console.log('historyNumbers', historyNumbers);
-});
-
 function clear() {
     console.log('clear');
     monitor.innerText = 0;
@@ -73,8 +20,9 @@ function backspace() {
         return;
     }
 
-    if (monitor.innerText.length > 2) monitor.innerText.pop();
-    else monitor.innerText = 0;
+    if (monitor.innerText.length > 1) {
+        monitor.innerText = monitor.innerText.slice(0, -1);
+    } else monitor.innerText = 0;
 }
 function divide() {
     isSumDone = false;
@@ -231,3 +179,61 @@ function sum() {
     historyNumbers = [];
     isSumDone = true;
 }
+
+function init() {
+    document
+        .querySelector('.btns-grid')
+        .addEventListener('click', function (e) {
+            // e.stopPropagation();
+            e.preventDefault();
+
+            console.log('formOnClick', e.target);
+            if (e.target.tagName === 'BUTTON') {
+                console.log('e.target.classList', e.target.classList);
+                switch (e.target.classList[0]) {
+                    case 'clear':
+                        clear();
+                        break;
+                    case 'backspace':
+                        backspace();
+                        break;
+                    case 'divide':
+                        divide();
+                        break;
+                    case 'n0':
+                    case 'n1':
+                    case 'n2':
+                    case 'n3':
+                    case 'n4':
+                    case 'n5':
+                    case 'n6':
+                    case 'n7':
+                    case 'n8':
+                    case 'n9':
+                        if (isSumDone) return;
+
+                        addNumberToMonitor(e.target.classList[0]);
+                        break;
+                    case 'multiply':
+                        multiply();
+                        break;
+                    case 'minus':
+                        minus();
+                        break;
+                    case 'plus':
+                        plus();
+                        break;
+                    case 'sum':
+                        sum();
+                        break;
+                    default:
+                        console.error('btn method not defined');
+                        break;
+                }
+            }
+
+            console.log('historyNumbers', historyNumbers);
+        });
+}
+
+init();
