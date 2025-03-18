@@ -16,11 +16,12 @@ function isLetter(letter) {
 }
 
 async function checkWordIsValid(guessedWord) {
-    const response = await fetch(API_SECRET_WORD_URL, {
+    const response = await fetch(API_WORD_VALID_URL, {
         method: 'POST',
         body: JSON.stringify({ word: guessedWord }),
     });
-    // const data = await response.json();
+    const data = await response.json();
+    return data;
 }
 
 function setInputListeners(htmlCollectionOfInputs) {
@@ -56,10 +57,31 @@ function setLabelListeners(htmlCollectionOfLabels) {
                 // validate word
                 if (attemptedWord === secret) {
                     console.log('game won');
-                } else if (typeof htmlCollectionOfLabels[i + 1] !== undefined) {
-                    // move to next attempt
-                    htmlCollectionOfLabels[i + 1].focus();
-                    console.log('wrong answer');
+                } else {
+                    checkWordIsValid(attemptedWord).then(res => {
+                        console.log('res', res);
+                        if (res.validWord) {
+                            // row had wrong word
+                            if (
+                                typeof htmlCollectionOfLabels[i + 1] !==
+                                undefined
+                            ) {
+                                // move to next attempt
+                                htmlCollectionOfLabels[i + 1].focus();
+                                console.log('wrong answer');
+                            }
+                        } else {
+                            // the answer was not a valid word
+                            console.log('the answer was not a valid word');
+                            for (
+                                let y = 0;
+                                y < attemptedWordInputs.length;
+                                y++
+                            ) {
+                                attemptedWordInputs[y].value = '';
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -67,13 +89,13 @@ function setLabelListeners(htmlCollectionOfLabels) {
 }
 
 function init() {
-    getSecretWord();
-
     const labels = document
         .getElementById('tester-input')
         .getElementsByTagName('label');
 
-    setLabelListeners(labels);
+    getSecretWord().then(() => {
+        setLabelListeners(labels);
+    });
 
     for (let i = 0; i < labels.length; i++) {
         const inputs = labels[i].getElementsByTagName('input');
