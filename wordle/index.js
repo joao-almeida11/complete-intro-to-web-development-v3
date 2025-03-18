@@ -27,6 +27,17 @@ async function checkWordIsValid(guessedWord) {
 function setInputListeners(htmlCollectionOfInputs) {
     for (let i = 0; i < htmlCollectionOfInputs.length; i++) {
         htmlCollectionOfInputs[i].addEventListener('keydown', function (event) {
+            if (event.key === 'Backspace') {
+                event.preventDefault();
+
+                if (htmlCollectionOfInputs[i].value) {
+                    htmlCollectionOfInputs[i].value = '';
+                } else if (i > 0) {
+                    htmlCollectionOfInputs[i - 1].value = '';
+                    htmlCollectionOfInputs[i - 1].focus();
+                }
+            }
+
             if (!isLetter(event.key) && event.key !== 'Enter') {
                 event.preventDefault();
             }
