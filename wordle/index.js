@@ -65,24 +65,122 @@ function setLabelListeners(htmlCollectionOfLabels) {
                         attemptedWord + attemptedWordInputs[y].value;
                 }
 
-                // validate word
+                if (attemptedWord.length !== 5) return;
                 if (attemptedWord === secret) {
-                    console.log('game won');
+                    // validate word
+                    for (let y = 0; y < attemptedWordInputs.length; y++) {
+                        attemptedWordInputs[y].style.color = 'green';
+                    }
+                    alert('you win');
                 } else {
                     checkWordIsValid(attemptedWord).then(res => {
-                        console.log('res', res);
                         if (res.validWord) {
                             // row had wrong word
-                            if (
-                                typeof htmlCollectionOfLabels[i + 1] !==
-                                undefined
+
+                            const secretWordArray = secret.split('');
+                            const attemptedWordArray = attemptedWord.split('');
+                            const results = [];
+                            for (let a = 0; a < secretWordArray.length; a++) {
+                                for (
+                                    let k = 0;
+                                    k < attemptedWordArray.length;
+                                    k++
+                                ) {
+                                    // letter in correct order
+                                    // keeping track of indexes
+                                    if (
+                                        attemptedWordArray[k] ===
+                                        secretWordArray[a]
+                                    ) {
+                                        // if the letter was already matched before
+                                        const IndexOfLetterAlreadyFound =
+                                            results.findIndex(
+                                                x =>
+                                                    x.letter ===
+                                                    attemptedWordArray[k]
+                                            );
+
+                                        console.log(
+                                            'IndexOfLetterAlreadyFound',
+                                            IndexOfLetterAlreadyFound
+                                        );
+
+                                        if (IndexOfLetterAlreadyFound !== -1) {
+                                            results[
+                                                IndexOfLetterAlreadyFound
+                                            ].indexOfAttempts.push(k);
+                                            results[
+                                                IndexOfLetterAlreadyFound
+                                            ].indexOfSecret.push(a);
+                                            results[
+                                                IndexOfLetterAlreadyFound
+                                            ].count += 1;
+                                        } else {
+                                            // if the letter has no previous match index
+                                            results.push({
+                                                letter: attemptedWordArray[k],
+                                                indexOfAttempts: [k],
+                                                indexOfSecret: [a],
+                                                count: 1,
+                                            });
+                                        }
+
+                                        if (k === a) {
+                                            attemptedWordInputs[a].style.color =
+                                                'green';
+                                        }
+                                    }
+                                }
+                            }
+
+                            console.log('results', results);
+
+                            // letter in incorrect order
+                            results.forEach(x => {
+                                const secretLetterCount =
+                                    x.indexOfSecret.length;
+                                const attemptExistingLetterCount =
+                                    x.indexOfAttempts.length;
+
+                                // for the amount of times the secret has the same letter
+                                // add the yellow color to the attempted word
+                                for (
+                                    let p = 0;
+                                    p < secretLetterCount.length;
+                                    p++
+                                ) {
+                                    if (p < attemptExistingLetterCount.length) {
+                                        attemptedWordInputs[
+                                            attemptExistingLetterCount[p]
+                                        ].style.color = 'yellow';
+                                    }
+                                }
+                            });
+
+                            for (
+                                let a = 0;
+                                a < attemptedWordInputs.length;
+                                a++
                             ) {
+                                if (
+                                    attemptedWordInputs[a].style.color ===
+                                    'black'
+                                ) {
+                                    attemptedWordInputs[a].style.color = 'red';
+                                }
+                            }
+
+                            if (i === htmlCollectionOfLabels.length - 1) {
+                                // there are no further attempts
+                                alert('you lose, the word was ' + secret);
+                            } else {
                                 // move to next attempt
                                 htmlCollectionOfLabels[i + 1].focus();
                                 console.log('wrong answer');
                             }
                         } else {
                             // the answer was not a valid word
+                            // clear the current label inputs
                             console.log('the answer was not a valid word');
                             for (
                                 let y = 0;
@@ -91,6 +189,8 @@ function setLabelListeners(htmlCollectionOfLabels) {
                             ) {
                                 attemptedWordInputs[y].value = '';
                             }
+
+                            attemptedWordInputs[0].focus();
                         }
                     });
                 }
@@ -104,9 +204,11 @@ function init() {
         .getElementById('tester-input')
         .getElementsByTagName('label');
 
-    getSecretWord().then(() => {
-        setLabelListeners(labels);
-    });
+    getSecretWord()
+        .then(() => {
+            setLabelListeners(labels);
+        })
+        .catch(err => console.error('failed to get secret word ->', err));
 
     for (let i = 0; i < labels.length; i++) {
         const inputs = labels[i].getElementsByTagName('input');
