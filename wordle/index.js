@@ -69,9 +69,12 @@ function setLabelListeners(htmlCollectionOfLabels) {
                 if (attemptedWord === secret) {
                     // validate word
                     for (let y = 0; y < attemptedWordInputs.length; y++) {
-                        attemptedWordInputs[y].style.color = 'green';
+                        attemptedWordInputs[y].classList.add('correct');
                     }
                     alert('you win');
+                    document
+                        .getElementsByTagName('h1')[0]
+                        .classList.add('winner');
                 } else {
                     checkWordIsValid(attemptedWord).then(res => {
                         if (res.validWord) {
@@ -126,8 +129,9 @@ function setLabelListeners(htmlCollectionOfLabels) {
                                         }
 
                                         if (k === a) {
-                                            attemptedWordInputs[a].style.color =
-                                                'green';
+                                            attemptedWordInputs[
+                                                a
+                                            ].classList.add('correct');
                                         }
                                     }
                                 }
@@ -152,7 +156,7 @@ function setLabelListeners(htmlCollectionOfLabels) {
                                     if (p < attemptExistingLetterCount.length) {
                                         attemptedWordInputs[
                                             attemptExistingLetterCount[p]
-                                        ].style.color = 'yellow';
+                                        ].classList.add('close');
                                     }
                                 }
                             });
@@ -163,10 +167,11 @@ function setLabelListeners(htmlCollectionOfLabels) {
                                 a++
                             ) {
                                 if (
-                                    attemptedWordInputs[a].style.color ===
-                                    'black'
+                                    attemptedWordInputs[a].classList.value == ''
                                 ) {
-                                    attemptedWordInputs[a].style.color = 'red';
+                                    attemptedWordInputs[a].classList.add(
+                                        'wrong'
+                                    );
                                 }
                             }
 
@@ -206,6 +211,9 @@ function init() {
 
     getSecretWord()
         .then(() => {
+            document
+                .getElementsByClassName('info-bar')[0]
+                .classList.add('hidden');
             setLabelListeners(labels);
         })
         .catch(err => console.error('failed to get secret word ->', err));

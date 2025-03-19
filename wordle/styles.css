@@ -3,7 +3,9 @@
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    /* kinda means use system font */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     height: 100vh;
     width: auto;
     display: flex;
@@ -12,12 +14,11 @@ body {
     justify-content: center;
     margin: 0;
 }
-
 header {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
 }
 
 h1 {
@@ -50,4 +51,93 @@ input {
     font-size: 2rem;
     border: 3px solid #cccccc;
     font-weight: 500;
+    text-transform: uppercase;
+}
+
+.correct {
+    background-color: darkgreen;
+    color: white;
+}
+.close {
+    background-color: goldenrod;
+    color: white;
+}
+.wrong {
+    background-color: #888;
+    color: white;
+}
+.invalid {
+    animation: flash 1s;
+}
+
+/* flashes red border and then fades back to grey */
+@keyframes flash {
+    5% {
+        border-color: crimson;
+    }
+    100% {
+        border-color: #ccc;
+    }
+}
+
+.spiral {
+    font-size: 2.5rem;
+    animation: spin 1.5s linear infinite;
+}
+
+/* rotates clockwise indefinitely */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* winner animation */
+@keyframes rainbow {
+    100%,
+    0% {
+        color: rgb(255, 0, 0);
+    }
+    8% {
+        color: rgb(255, 127, 0);
+    }
+    16% {
+        color: rgb(255, 225, 0);
+    }
+    25% {
+        color: rgb(127, 225, 0);
+    }
+    33% {
+        color: rgb(0, 225, 0);
+    }
+    41% {
+        color: rgb(0, 225, 127);
+    }
+    50% {
+        color: rgb(0, 255, 255);
+    }
+    58% {
+        color: rgb(0, 127, 225);
+    }
+    66% {
+        color: rgb(0, 0, 225);
+    }
+    75% {
+        color: rgb(127, 0, 225);
+    }
+    83% {
+        color: rgb(225, 0, 225);
+    }
+
+    91% {
+        color: rgb(225, 0, 127);
+    }
+}
+
+.winner {
+    animation: rainbow 4s infinite linear;
+}
+
+.hidden {
+    visibility: hidden;
 }
