@@ -1,8 +1,10 @@
 const API_SECRET_WORD_URL = 'https://words.dev-apis.com/word-of-the-day';
 const API_WORD_VALID_URL = 'https://words.dev-apis.com/validate-word';
 const LETTER_VALIDATION = /^[a-zA-Z]$/;
+const ANSWER_LENGTH = 5;
 
 let secret;
+let done = false;
 
 async function getSecretWord() {
     const response = await fetch(API_SECRET_WORD_URL);
@@ -26,22 +28,30 @@ async function checkWordIsValid(guessedWord) {
 
 function setInputListeners(htmlCollectionOfInputs) {
     for (let i = 0; i < htmlCollectionOfInputs.length; i++) {
-        htmlCollectionOfInputs[i].addEventListener('keydown', function (event) {
-            if (event.key === 'Backspace') {
-                event.preventDefault();
+        htmlCollectionOfInputs[i].addEventListener(
+            'keydown',
+            function handleKeyPress(event) {
+                if (done) return;
+                const action = event.key;
+                // naming the function for easier debugging
+                if (action === 'Backspace') {
+                    event.preventDefault();
 
-                if (htmlCollectionOfInputs[i].value) {
-                    htmlCollectionOfInputs[i].value = '';
-                } else if (i > 0) {
-                    htmlCollectionOfInputs[i - 1].value = '';
-                    htmlCollectionOfInputs[i - 1].focus();
+                    if (htmlCollectionOfInputs[i].value) {
+                        // if its on the first character delete the first character
+                        htmlCollectionOfInputs[i].value = '';
+                    } else if (i > 0) {
+                        // if its not delete the current selected character and focus on the previous character
+                        htmlCollectionOfInputs[i - 1].value = '';
+                        htmlCollectionOfInputs[i - 1].focus();
+                    }
+                }
+
+                if (!isLetter(action) && action !== 'Enter') {
+                    event.preventDefault();
                 }
             }
-
-            if (!isLetter(event.key) && event.key !== 'Enter') {
-                event.preventDefault();
-            }
-        });
+        );
 
         htmlCollectionOfInputs[i].addEventListener('input', function (event) {
             if (htmlCollectionOfInputs[i + 1]) {
@@ -50,11 +60,13 @@ function setInputListeners(htmlCollectionOfInputs) {
         });
     }
 }
+
 function setLabelListeners(htmlCollectionOfLabels) {
     for (let i = 0; i < htmlCollectionOfLabels.length; i++) {
         htmlCollectionOfLabels[i].addEventListener('keydown', function (event) {
             event.stopPropagation();
-            if (event.key === 'Enter') {
+            const action = event.key;
+            if (action === 'Enter') {
                 // extract attempted word from inputs
                 const attemptedWordInputs =
                     htmlCollectionOfLabels[i].getElementsByTagName('input');
@@ -65,7 +77,7 @@ function setLabelListeners(htmlCollectionOfLabels) {
                         attemptedWord + attemptedWordInputs[y].value;
                 }
 
-                if (attemptedWord.length !== 5) return;
+                if (attemptedWord.length !== ANSWER_LENGTH) return;
                 if (attemptedWord === secret) {
                     // validate word
                     for (let y = 0; y < attemptedWordInputs.length; y++) {
@@ -75,6 +87,7 @@ function setLabelListeners(htmlCollectionOfLabels) {
                     document
                         .getElementsByTagName('h1')[0]
                         .classList.add('winner');
+                    done = true;
                 } else {
                     checkWordIsValid(attemptedWord).then(res => {
                         if (res.validWord) {
@@ -178,24 +191,37 @@ function setLabelListeners(htmlCollectionOfLabels) {
                             if (i === htmlCollectionOfLabels.length - 1) {
                                 // there are no further attempts
                                 alert('you lose, the word was ' + secret);
+                                done = true;
                             } else {
                                 // move to next attempt
                                 htmlCollectionOfLabels[i + 1].focus();
                                 console.log('wrong answer');
                             }
                         } else {
+                            console.log(
+                                'htmlCollectionOfLabels[i]',
+                                htmlCollectionOfLabels[i]
+                            );
+                            htmlCollectionOfLabels[i].classList.add('invalid');
+                            document.activeElement.blur(); // removes the current focus
                             // the answer was not a valid word
                             // clear the current label inputs
                             console.log('the answer was not a valid word');
-                            for (
-                                let y = 0;
-                                y < attemptedWordInputs.length;
-                                y++
-                            ) {
-                                attemptedWordInputs[y].value = '';
-                            }
 
-                            attemptedWordInputs[0].focus();
+                            setTimeout(() => {
+                                for (
+                                    let y = 0;
+                                    y < attemptedWordInputs.length;
+                                    y++
+                                ) {
+                                    attemptedWordInputs[y].value = '';
+                                }
+
+                                htmlCollectionOfLabels[i].classList.remove(
+                                    'invalid'
+                                );
+                                attemptedWordInputs[0].focus();
+                            }, 1000);
                         }
                     });
                 }
