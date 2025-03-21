@@ -1,0 +1,18 @@
+{
+    "name": "motion",
+    "version": "1.0.0",
+    "description": "adding libraries to js code",
+    "type": "module",
+    "scripts": {
+        "start": "parcel index.html",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "popmotion": "^11.0.5"
+    },
+    "devDependencies": {
+        "parcel": "^2.14.1"
+    }
+}
